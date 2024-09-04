@@ -1,21 +1,24 @@
-// Chaining
-// $("#contact-methods").css({border: "2px solid red"})
-//     .next().css({border: "2px solid blue"})
-//     .closest("section").css({border: "2px solid pink"});
+// Wrap and Unwrap Elements
+// 每個 section 都各自被 elements 包起來
+// $("section").wrap("<div>");
+// 解除每個 section 外面包起來的 elements
+// $("section").unwrap();
+// 每個 section 都被同一個 elements 包起來
+// $("section").wrapAll("<div>");
 
-// Adding Content
-let tweet = "<div style='margin: 20px 0; padding: 10px; background: #eee;'>Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>";
+const wrapper = "<div class='wrapper'>";
+const button = $(".button");
+let wrapped = true;
 
-// 增加 div 的內容並將 tweet 加到 div 裡面的上 or 下方
-// $("#tweets div").append(tweet);
-// $("#tweets div").prepend(tweet);
-
-// 增加 div 的內容並將 tweet 加到 div 外面的上 or 下方
-// $("#tweets div").before(tweet);
-// $("#tweets div").after(tweet);
-
-// 改變 div 的裡面整個 html 內容
-// $("#tweets div").html(tweet);
-
-// 改變 div 裡面的文字內容
-// $("#tweets div").text(tweet);
+button[0].addEventListener('click',function(){
+    console.log(wrapped);
+    if(wrapped){
+        $("section").unwrap();
+        wrapped = false;
+        button.text("Wrap");
+    } else {
+        $("section").wrapAll(wrapper);
+        wrapped = true;
+        button.text("Unwrap");
+    }
+})
