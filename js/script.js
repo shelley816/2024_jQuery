@@ -1,7 +1,9 @@
-// Binding & Unbinding Events
+// Event Helpers
 
-const myLis = $("#points-of-sale li");
-myLis.on("click", function(){
-    $(this).css({"background" : "pink"});
-    myLis.off("click");
-})
+// $("#lead-banner").click(function(){
+//     alert("you clicked me");
+// })
+
+// $("#lead-banner").dblclick(function(){
+//     alert("you clicked me");
+// })
