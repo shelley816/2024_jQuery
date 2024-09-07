@@ -1,13 +1,15 @@
-// The Event Object in jQuery
+// Animations in jQuery
 
 $(document).ready(function(){
-    
-    $("*").on("click", function(e){
-        console.log(e.target);
-        console.log("The event type is:" + e.type);
-        console.log("X co-ordinate of the event is:" + e.pageX);
-        console.log("Y co-ordinate of the event is:" + e.pageY);
-        e.stopPropagation();
+    // 沒有動畫
+    // $("section > h2").on("click", function(){
+    //     $(this).css({"width" : "500px", "height" : "100px"});
+    // })
+    // 有動畫
+    $("section > h2").on("click", function(){
+        function complete(){
+            alert("complete");
+        }
+        $(this).animate({"width" : "500px", "height" : "100px"}, 1000, "linear", complete);
     })
-
 })
