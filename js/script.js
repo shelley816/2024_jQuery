@@ -1,15 +1,10 @@
-// Animations in jQuery
+// Fading Elements In & Out
 
 $(document).ready(function(){
-    // 沒有動畫
     // $("section > h2").on("click", function(){
-    //     $(this).css({"width" : "500px", "height" : "100px"});
+    //     $(this).fadeOut(2000).fadeIn(500);
     // })
-    // 有動畫
     $("section > h2").on("click", function(){
-        function complete(){
-            alert("complete");
-        }
-        $(this).animate({"width" : "500px", "height" : "100px"}, 1000, "linear", complete);
+        $(this).fadeTo(2000, 0.1).fadeTo(1000, 0.7);
     })
 })
