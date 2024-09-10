@@ -1,12 +1,20 @@
-// Sliding Elements
+// Fading Animation Example
 
 $(document).ready(function(){
-    $(".slide-button-up").on("click", function(){
-        $("#lead-banner").slideUp(1000);
-    })
-    $(".slide-button-down").on("click", function(){
-        $("#lead-banner").slideDown(2000, function(){
-            alert("ok");
-        });
-    })
-})
+    const allQuotes = $("blockquote");
+    let currentQuote = 0;
+
+    function changeQuotes(){
+        $(allQuotes[currentQuote]).fadeOut(200);
+
+        if(currentQuote == allQuotes.length - 1){
+            currentQuote = 0;
+        } else {
+            currentQuote++;
+        }
+
+        $(allQuotes[currentQuote]).fadeIn(200);
+    }
+
+    const quoteTimer = setInterval(changeQuotes, 3000);
+});
