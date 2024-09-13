@@ -1,21 +1,9 @@
-// Fading Animation Example
+// Sliding Animation Example
 
 $(document).ready(function(){
-    const allQuotes = $("blockquote");
-    let currentQuote = 0;
+    const items = $("#points-of-sale li");
 
-    function changeQuotes(){
-        $(allQuotes[currentQuote]).fadeOut(200, function(){
-            
-            if(currentQuote == allQuotes.length - 1){
-                currentQuote = 0;
-            } else {
-                currentQuote++;
-            }
-            $(allQuotes[currentQuote]).fadeIn(200);
-
-        });
-    }
-
-    const quoteTimer = setInterval(changeQuotes, 3000);
+    items.on("click", function(){
+        $(this).find("p").slideToggle(500);
+    })
 });
