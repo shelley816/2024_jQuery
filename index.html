@@ -6,10 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/travelList.js"></script>
 </head>
 <body>
+    <nav class="navbar-primary text-white mb-4">
+        <div class="container">
+            <h2 class="site-title">My travel essentials list</h2>
+            <p>Yuzawa in 2025</p>
+        </div>
+    </nav>
+    <a href="#" class="pst-f b-1 r-1 btn-primary text-white">+ 物品</a>
+    <div class="container">
+        <h2 class="font-lg mb-2">搭機必備物品</h2>
+        <div class="row gap-2 justify-flex-start">
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-1">
+                <input type="checkbox" name="checkbox-nested-1" id="checkbox-nested-1"><span class="ml-1">護照正本</span>
+                <p class="text-gray"></p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-2">
+                <input type="checkbox" name="checkbox-nested-2" id="checkbox-nested-2"><span class="ml-1">護照影本</span>
+                <p class="text-gray">一張放隨身包、一張放行李箱</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-3">
+                <input type="checkbox" name="checkbox-nested-3" id="checkbox-nested-3"><span class="ml-1">2寸大頭貼</span>
+                <p class="text-gray">2張</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-4">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-4"><span class="ml-1">外幣</span>
+                <p class="text-gray">日幣換 xxx 元</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-5">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-5"><span class="ml-1">信用卡</span>
+                <p class="text-gray">準備2~3張，備好信用卡遺失聯絡電話</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-6">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-6"><span class="ml-1">信用卡2</span>
+                <p class="text-gray">一張存在 Apple pay 並放在家裡</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+        </div>
     
-    <script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
+        <hr class="mt-2 mb-2">
+
+        <h2 class="font-lg mb-2">衣物</h2>
+        <div class="row gap-2 justify-flex-start">
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-7">
+                <input type="checkbox" name="checkbox-nested-1" id="checkbox-nested-7"><span class="ml-1">衣、褲、裙</span>
+                <p class="text-gray">6件衣服、3件褲子or裙子(依個人喜好)</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-8">
+                <input type="checkbox" name="checkbox-nested-2" id="checkbox-nested-8"><span class="ml-1">內衣褲</span>
+                <p class="text-gray">各5件</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-9">
+                <input type="checkbox" name="checkbox-nested-3" id="checkbox-nested-9"><span class="ml-1">雪襪</span>
+                <p class="text-gray">4雙</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-10">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-10"><span class="ml-1">外幣</span>
+                <p class="text-gray">日幣換 xxx 元</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-11">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-11"><span class="ml-1">鞋子、拖鞋</span>
+                <p class="text-gray">1雙休閒鞋、1雙拖鞋</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-12">
+                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-12"><span class="ml-1">外套</span>
+                <p class="text-gray">薄外套(防曬)、厚外套(機上or晚上怕冷)</p>
+                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
+            </label>
+        </div>
+    
+        <hr class="mt-2 mb-2">
+
+        <a class="row justify-center align-center col-12-xl pt-1 pb-1 bg-gray-light-8 font-lg text-primary" href="#">+ 類別</a>
+        <div class="container">
+            <div class="row gap-2 justify-flex-start">
+                <div class="col-4-xl">
+                    <label for="types">選擇分類</label>
+                    <select name="types" id="types">
+                      <option selected="selected">搭機必備物品</option>
+                      <option>衣物</option>
+                    </select>
+                </div>
+                <div class="col-4-xl">
+                    <label for="tags">項目: </label>
+                    <input id="tags">
+                </div>
+                <div class="col-4-xl">
+                    <label for="detail">備註: </label>
+                    <input id="detail">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -126,6 +126,18 @@ img {
   justify-content: space-around;
 }
 
+.align-baseline {
+  align-items: baseline;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: end;
+}
+
 @media (min-width: 0) {
   .col-1-xs {
     box-sizing: border-box;
@@ -2343,4 +2355,120 @@ img {
 
 .font-xxl {
   font-size: 3rem;
+}
+
+.pst-a {
+  position: absolute;
+}
+
+.pst-f {
+  position: fixed;
+}
+
+.pst-r {
+  position: relative;
+}
+
+.pst-s {
+  position: static;
+}
+
+.pst-u {
+  position: unset;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.t-1 {
+  top: 10px;
+}
+
+.t-2 {
+  top: 20px;
+}
+
+.t-3 {
+  top: 30px;
+}
+
+.t-4 {
+  top: 40px;
+}
+
+.t-5 {
+  top: 50px;
+}
+
+.b-0 {
+  bottom: 0;
+}
+
+.b-1 {
+  bottom: 10px;
+}
+
+.b-2 {
+  bottom: 20px;
+}
+
+.b-3 {
+  bottom: 30px;
+}
+
+.b-4 {
+  bottom: 40px;
+}
+
+.b-5 {
+  bottom: 50px;
+}
+
+.l-0 {
+  left: 0;
+}
+
+.l-1 {
+  left: 10px;
+}
+
+.l-2 {
+  left: 20px;
+}
+
+.l-3 {
+  left: 30px;
+}
+
+.l-4 {
+  left: 40px;
+}
+
+.l-5 {
+  left: 50px;
+}
+
+.r-0 {
+  right: 0;
+}
+
+.r-1 {
+  right: 10px;
+}
+
+.r-2 {
+  right: 20px;
+}
+
+.r-3 {
+  right: 30px;
+}
+
+.r-4 {
+  right: 40px;
+}
+
+.r-5 {
+  right: 50px;
 }
