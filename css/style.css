@@ -2472,3 +2472,16 @@ img {
 .r-5 {
   right: 50px;
 }
+
+.cover-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.cover-bg .container {
+  max-width: 600px;
+  background-color: rgb(255, 255, 255);
+}
