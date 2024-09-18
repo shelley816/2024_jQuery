@@ -110,71 +110,36 @@ $(document).ready(function(){
     
     // 初始
     function init(){
-        let types = [];
-        for (let i = 0; i < typesLen; i++) {
-            types.push(dataArr.items[i].type);
-        };
+        // 獲取所有 types 並去重
+        let getTypes = [...new Set(dataArr.items.map(item => item.type))];
         
-        //去除重複的值
-        let getTypes = types.filter(function(element, index, arr){
-            return arr.indexOf(element) === index;
-        });
-        
-        //放入網頁
-        let content = '';
-        for (let i = 0; i < getTypes.length; i++) {
-            let typeName = dataArr.types[i].name;
-            let typeDescrip = dataArr.types[i].description;
-            content += `
+        // 建立內容並插入網頁
+        let content = getTypes.map((type, index) => `
             <div class="pst-r mb-2">
-                <h2 class="font-lg mb-0">${typeName}</h2>
-                <p class="font-md">${typeDescrip}</p>
-                <div class="checkBox row gap-2 justify-flex-start">
-                </div>
+                <h2 class="font-lg mb-0">${dataArr.types[index].name}</h2>
+                <p class="font-md">${dataArr.types[index].description}</p>
+                <div class="checkBox row gap-2 justify-flex-start"></div>
             </div>
-            <hr class="mt-2 mb-2">`;
-        }
+            <hr class="mt-2 mb-2">
+        `).join('');
         $(container).html(content);
-
-        const itemsLen = dataArr.items.length;
-        const checkBox = $(".checkBox");
         
-        let checkBox0 = '';
-        let checkBox1 = '';
-        let checkBox2 = '';
-        for (let i = 0; i < itemsLen; i++) {
-            let itemsName = dataArr.items[i].name;
-            let itemsDescrip = dataArr.items[i].description;
-            
-            if(dataArr.items[i].type == getTypes[0]){
-                checkBox0 += `
+        // 插入 items 到相應的 checkBox
+        let checkBox = $(".checkBox");
+        dataArr.items.forEach((item, i) => {
+            let itemHTML = `
                 <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
-                    <input type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}"><span class="ml-1">${itemsName}</span>
-                    <p class="text-gray">${itemsDescrip}</p>
+                    <input type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}">
+                    <span class="ml-1">${item.name}</span>
+                    <p class="text-gray">${item.description}</p>
                     <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
                 </label>
-                `;
-                $(checkBox[0]).html(checkBox0);
-            } else if (dataArr.items[i].type == getTypes[1]){
-                checkBox1 += `
-                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
-                    <input type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}"><span class="ml-1">${itemsName}</span>
-                    <p class="text-gray">${itemsDescrip}</p>
-                    <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-                </label>
-                `;
-                $(checkBox[1]).html(checkBox1);
-            } else {
-                checkBox2 += `
-                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
-                    <input type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}"><span class="ml-1">${itemsName}</span>
-                    <p class="text-gray">${itemsDescrip}</p>
-                    <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-                </label>
-                `;
-                $(checkBox[2]).html(checkBox2);
+            `;
+            let typeIndex = getTypes.indexOf(item.type);
+            if (typeIndex !== -1) {
+                $(checkBox[typeIndex]).append(itemHTML);
             }
-        }
+        });
     };
     init();
 
