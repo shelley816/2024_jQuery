@@ -12,13 +12,17 @@ $(document).ready(function(){
             {
                 "name" : "3C 產品",
                 "description" : "電池要放隨身行李"
+            },
+            {
+                "name" : "生活類",
+                "description" : ""
             }
         ],
         "items": [
             {
                 "type" : "搭機必備物品",
                 "name" : "護照正本",
-                "state" : true,
+                "state" : false,
                 "description" : ""
             },
             {
@@ -50,6 +54,54 @@ $(document).ready(function(){
                 "name" : "信用卡2",
                 "state" : false,
                 "description" : "一張存在 Apple pay 並放在家裡"
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "提款卡",
+                "state" : false,
+                "description" : "開啟跨國外幣提領功能"
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "車票",
+                "state" : false,
+                "description" : ""
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "景點票券",
+                "state" : false,
+                "description" : ""
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "搭機小物",
+                "state" : false,
+                "description" : "眼罩、耳塞、頸枕、毛毯、閱讀刊物"
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "隨身小物",
+                "state" : false,
+                "description" : "防盜腰包、密碼鎖、環保杯、環保餐具"
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "行李秤",
+                "state" : false,
+                "description" : ""
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "原子筆",
+                "state" : false,
+                "description" : "2支(寫入境表用)"
+            },
+            {
+                "type" : "搭機必備物品",
+                "name" : "網卡",
+                "state" : false,
+                "description" : "視個人需求(有買漫遊就不需要)"
             },
             {
                 "type" : "衣物",
@@ -98,14 +150,20 @@ $(document).ready(function(){
                 "name" : "萬國插座變壓器",
                 "state" : false,
                 "description" : ""
+            },
+            {
+                "type" : "生活類",
+                "name" : "盥洗用品",
+                "state" : false,
+                "description" : "牙刷、牙膏、牙線、牙籤、棉花棒、洗面乳"
             }
         ]
     };
-
+    
     let dataStr = JSON.stringify(data);
     localStorage.setItem('travelList', dataStr);
+
     let dataArr = JSON.parse(localStorage.getItem('travelList'));
-    const typesLen = dataArr.items.length;
     const container = $("#showContent");
     
     // 初始
@@ -127,9 +185,10 @@ $(document).ready(function(){
         // 插入 items 到相應的 checkBox
         let checkBox = $(".checkBox");
         dataArr.items.forEach((item, i) => {
+            let currentState =  dataArr.items[i].state;
             let itemHTML = `
                 <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
-                    <input type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}">
+                    <input data-num=${i} type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}" ${currentState ? 'checked' : ''}>
                     <span class="ml-1">${item.name}</span>
                     <p class="text-gray">${item.description}</p>
                     <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
@@ -139,12 +198,26 @@ $(document).ready(function(){
             if (typeIndex !== -1) {
                 $(checkBox[typeIndex]).append(itemHTML);
             }
+            
         });
     };
     init();
 
-
     // 打勾後 state 改成 true, 回傳 data, 儲存 localstorage
+    const inputOj = $("input");
+    inputOj.on("click", function(e){
+        const getNum = e.target.getAttribute("data-num");
+        let currentState = e.target.checked;
+        
+        data.items[getNum].state = currentState;
+        
+        dataStr = JSON.stringify(data);
+        localStorage.setItem('travelList', dataStr);
+        dataArr = JSON.parse(localStorage.getItem('travelList'));
+
+    })
+
+
     // let test01 = data.items[1].state;
     // $("input").prop("checked", test01);
 
