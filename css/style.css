@@ -2485,3 +2485,11 @@ img {
   max-width: 600px;
   background-color: rgb(255, 255, 255);
 }
+
+#addButton {
+  z-index: 9998;
+}
+
+#itemPopup {
+  z-index: 9999;
+}

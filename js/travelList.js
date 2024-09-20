@@ -106,30 +106,6 @@ $(document).ready(function(){
                     "description" : "視個人需求(有買漫遊就不需要)"
                 },
                 {
-                    "type" : "衣物",
-                    "name" : "衣、褲、裙",
-                    "state" : false,
-                    "description" : "6件衣服、3件褲子or裙子"
-                },
-                {
-                    "type" : "衣物",
-                    "name" : "內衣褲",
-                    "state" : false,
-                    "description" : "各5件"
-                },
-                {
-                    "type" : "衣物",
-                    "name" : "雪襪",
-                    "state" : false,
-                    "description" : "4雙"
-                },
-                {
-                    "type" : "衣物",
-                    "name" : "鞋子、拖鞋",
-                    "state" : false,
-                    "description" : "1雙休閒鞋、1雙拖鞋"
-                },
-                {
                     "type" : "3C 產品",
                     "name" : "手機",
                     "state" : false,
@@ -154,10 +130,94 @@ $(document).ready(function(){
                     "description" : ""
                 },
                 {
+                    "type" : "衣物",
+                    "name" : "衣、褲、裙",
+                    "state" : false,
+                    "description" : "6件衣服、3件褲子or裙子"
+                },
+                {
+                    "type" : "衣物",
+                    "name" : "內衣褲",
+                    "state" : false,
+                    "description" : "各5件"
+                },
+                {
+                    "type" : "衣物",
+                    "name" : "雪襪",
+                    "state" : false,
+                    "description" : "4雙"
+                },
+                {
+                    "type" : "衣物",
+                    "name" : "鞋子、拖鞋",
+                    "state" : false,
+                    "description" : "1雙休閒鞋、1雙拖鞋"
+                },
+                {
+                    "type" : "衣物",
+                    "name" : "外套",
+                    "state" : false,
+                    "description" : "防曬薄外套、保暖厚外套"
+                },
+                {
+                    "type" : "衣物",
+                    "name" : "遮陽帽",
+                    "state" : false,
+                    "description" : ""
+                },
+                {
                     "type" : "生活類",
                     "name" : "盥洗用品",
                     "state" : false,
                     "description" : "牙刷、牙膏、牙線、牙籤、棉花棒、洗面乳"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "護理用品",
+                    "state" : false,
+                    "description" : "消毒酒精、口罩、ok蹦、濕紙巾、衛生紙、防蚊液"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "防曬用品",
+                    "state" : false,
+                    "description" : "太陽眼鏡、防曬乳"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "個人藥品",
+                    "state" : false,
+                    "description" : "暈車藥、感冒藥、B群、維他命C"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "保養品",
+                    "state" : false,
+                    "description" : "化妝水、保濕、精華液、乳液"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "卸妝",
+                    "state" : false,
+                    "description" : "卸妝水、卸妝棉"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "化妝",
+                    "state" : false,
+                    "description" : "底妝、眼線、眼影、粉餅、口紅、遮瑕"
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "生理用品",
+                    "state" : false,
+                    "description" : ""
+                },
+                {
+                    "type" : "生活類",
+                    "name" : "其他",
+                    "state" : false,
+                    "description" : "環保餐盒、膠帶"
                 }
             ]
         };
@@ -167,11 +227,12 @@ $(document).ready(function(){
 
     let dataArr = JSON.parse(localStorage.getItem('travelList'));
     const container = $("#showContent");
+
+    // 獲取所有 types 並去重
+    let getTypes = [...new Set(dataArr.items.map(item => item.type))];
     
     // 初始
     function init(){
-        // 獲取所有 types 並去重
-        let getTypes = [...new Set(dataArr.items.map(item => item.type))];
         
         // 建立內容並插入網頁
         let content = getTypes.map((type, index) => `
@@ -205,18 +266,88 @@ $(document).ready(function(){
     };
     init();
 
-    // 監聽 checkbox 變化並更新狀態
-    const inputOj = $("input");
-    inputOj.on("change", function(e){
+    // 監聽 checkbox 變化並更新狀態（使用事件委派）
+    $(document).on("change", "input[type=checkbox]", function(e){
         const getNum = e.target.getAttribute("data-num");
         let currentState = e.target.checked;
-        
+
+        console.log(currentState);
         // 更新數據
         dataArr.items[getNum].state = currentState;
-        
+
         // 儲存到 localStorage
         dataStr = JSON.stringify(dataArr);
         localStorage.setItem('travelList', dataStr);
+    });
+
+    // 新增物品
+    const addBtn = $("#addButton");
+    const cancelItemPopup = $("#cancelItemPopup");
+    const itemPopup = $("#itemPopup");
+    const typesWarp = $("#types");
+    const itemNameId = $("#itemName");
+    const itemDetailId = $("#itemDetail");
+    const textRemindId = $("#textRemind");
+    const addItemId = $("#addItem");
+
+    // 顯示表格
+    addBtn.on("click", function(e){
+        e.preventDefault();
+
+        // 建立內容並插入網頁
+        let content = `<option value="">請選擇類型</option>` +  getTypes.map((type, index) => `<option>${dataArr.types[index].name}</option>`).join('');
+        $(typesWarp).html(content);
+
+        // 顯示 UI
+        $(itemPopup).fadeIn();
+    });
+
+    // 關閉 Popup
+    cancelItemPopup.on("click", function(e){
+        e.preventDefault();
+        $(itemPopup).fadeOut();
+    });
+
+    // 偵測 <option> 是否改變
+    let hasChanged = false;  // 變量來追蹤是否發生了 change 事件
+    $(typesWarp).on("change", function() {
+        hasChanged = true;  // 當發生 change 時，標記為 true
+    });
+
+    //新增物品 + 更新資料
+    addItemId.on("click", function(e){
+        let typesVal = $(typesWarp).val();
+        let itemNameVal = $(itemNameId).val();
+        let itemDetailVal = $(itemDetailId).val();
+
+        e.preventDefault();
+        // 檢查是否已經選擇了類型（也就是是否有 change）
+        if (!hasChanged) {
+            $(textRemindId).html("*請選擇類型");
+            return;
+        };
+
+        // console.log(typeof(itemNameValue));
+        if (!itemNameId || itemNameVal.length === 0) {
+            $(textRemindId).html("*請輸入物品名稱");
+            return;
+        }
+
+        let record = {
+            "type" : typesVal,
+            "name" : itemNameVal,
+            "state" : false,
+            "description" : itemDetailVal
+        };
+        dataArr.items.push(record);
+        dataStr = JSON.stringify(dataArr);
+        localStorage.setItem('travelList', dataStr);
+        $(itemPopup).fadeOut();
+        init();
+
+        typesVal = "";
+        itemNameVal = "";
+        itemDetailVal = "";
     });
 
 });

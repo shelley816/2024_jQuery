@@ -16,7 +16,7 @@
             <p>Yuzawa in 2025</p>
         </div>
     </nav>
-    <a href="#" class="pst-f b-1 r-1 btn-primary text-white">+ 物品</a>
+    <a id="addButton" href="#" class="pst-f b-1 r-1 btn-primary text-white">+ 物品</a>
     <div id="showContent" class="container">
         <!-- <div class="pst-r mb-2">
             <h2 class="font-lg mb-0">搭機必備物品</h2>
@@ -42,26 +42,6 @@
                 <p class="text-gray">一張放隨身包、一張放行李箱</p>
                 <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
             </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-3">
-                <input type="checkbox" name="checkbox-nested-3" id="checkbox-nested-3"><span class="ml-1">2寸大頭貼</span>
-                <p class="text-gray">2張</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-4">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-4"><span class="ml-1">外幣</span>
-                <p class="text-gray">日幣換 xxx 元</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-5">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-5"><span class="ml-1">信用卡</span>
-                <p class="text-gray">準備2~3張，備好信用卡遺失聯絡電話</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-6">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-6"><span class="ml-1">信用卡2</span>
-                <p class="text-gray">一張存在 Apple pay 並放在家裡</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
         </div>
     
         <hr class="mt-2 mb-2">
@@ -82,26 +62,6 @@
                 <p class="text-gray">各5件</p>
                 <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
             </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-9">
-                <input type="checkbox" name="checkbox-nested-3" id="checkbox-nested-9"><span class="ml-1">雪襪</span>
-                <p class="text-gray">4雙</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-10">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-10"><span class="ml-1">外幣</span>
-                <p class="text-gray">日幣換 xxx 元</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-11">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-11"><span class="ml-1">鞋子、拖鞋</span>
-                <p class="text-gray">1雙休閒鞋、1雙拖鞋</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
-            <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-12">
-                <input type="checkbox" name="checkbox-nested-4" id="checkbox-nested-12"><span class="ml-1">外套</span>
-                <p class="text-gray">薄外套(防曬)、厚外套(機上or晚上怕冷)</p>
-                <a class="pst-a t-2 r-2" href="#"><img class="display-b" src="https://fakeimg.pl/21" alt=""></a>
-            </label>
         </div>
     
         <hr class="mt-2 mb-2">
@@ -112,28 +72,30 @@
     </div>
 
     <!-- 新增物品 popup -->
-    <!-- <div class="cover-bg row align-center">
+    <div id="itemPopup" class="cover-bg row align-center" style="display: none;">
         <div class="container pst-r">
             <div class="gap-2 justify-flex-start">
                 <div class="col-12-xl">
                     <label for="types">選擇分類</label>
-                    <select name="types" id="types">
-                      <option selected="selected">搭機必備物品</option>
-                      <option>衣物</option>
+                    <select id="types" name="types">
+                        <!-- <option selected="selected">搭機必備物品</option>
+                        <option>衣物</option> -->
                     </select>
                 </div>
                 <div class="col-12-xl">
                     <label for="tags">物品: </label>
-                    <input id="tags">
+                    <input id="itemName" type="text" placeholder="請輸入物品名稱">
                 </div>
                 <div class="col-12-xl">
                     <label for="detail">備註: </label>
-                    <input id="detail">
+                    <input id="itemDetail" type="text" placeholder="物品相關細節">
                 </div>
+                <p id="textRemind" class="text-gray"></p>
+                <a id="addItem" class="pst-r btn-primary text-white" href="#">新增物品</a>
             </div>
-            <a class="pst-a t-1 r-1" href="#">close</a>
+            <a id="cancelItemPopup" class="pst-a t-1 r-1" href="#">close</a>
         </div>
-    </div> -->
+    </div>
 
     <!-- 新增分類 popup -->
     <!-- <div class="cover-bg row align-center">
