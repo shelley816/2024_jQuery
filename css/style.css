@@ -2486,6 +2486,14 @@ img {
   background-color: rgb(255, 255, 255);
 }
 
+.checkBox label > a {
+  padding: 10px;
+  border-radius: 20px;
+}
+.checkBox label > a:hover {
+  background-color: #edf1f1;
+}
+
 #addButton {
   z-index: 9998;
 }
