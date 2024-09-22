@@ -1,9 +1,9 @@
-// Event Helpers
+// Sliding Animation Example
 
-// $("#lead-banner").click(function(){
-//     alert("you clicked me");
-// })
+$(document).ready(function(){
+    const items = $("#points-of-sale li");
 
-// $("#lead-banner").dblclick(function(){
-//     alert("you clicked me");
-// })
+    items.on("click", function(){
+        $(this).find("p").slideToggle(500);
+    })
+});

@@ -355,13 +355,30 @@ section#points-of-sale ul{
     height: auto !important;
 }
 
+.slide-button-up, .slide-button-down {
+    clear: right;
+    padding: 10px;
+    background: #ccc;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    color: #333;
+    cursor: pointer;
+    width: 150px;
+    margin: 10px auto;
+    text-align: center;
+}
 
+blockquote {
+    display: none;
+}
 
+blockquote:first-of-type {
+    display: block;
+}
 
-
-
-
-
+#points-of-sale li p{
+    display: none;
+}
 
 
 
