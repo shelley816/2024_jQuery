@@ -232,15 +232,31 @@ $(document).ready(function(){
 
     // 初始化畫面
     function init() {
-        let content = getTypes.map((type, index) => `
-            <div class="pst-r mb-2">
-                <h2 class="font-lg mb-1">${dataArr.types[index].name}</h2>
-                <p class="font-md mb-1">${dataArr.types[index].description}</p>
-                <div class="checkBox row gap-1 justify-flex-start"></div>
-            </div>
-            <hr class="mt-2 mb-2">
-        `).join('');
-        container.html(content);
+        // 建立類型名稱到類型物件的映射
+        let typesMap = {};
+        dataArr.types.forEach(typeObj => {
+            typesMap[typeObj.name] = typeObj;
+        });
+
+        // 建立內容並插入網頁
+        let content = getTypes.map(typeName => {
+            let typeObj = typesMap[typeName];
+            if (!typeObj) {
+                // 如果在 typesMap 中找不到對應的類型物件，建立一個空的類型物件
+                typeObj = { name: typeName, description: "" };
+                // 可以選擇將其加入到 dataArr.types 中
+                dataArr.types.push(typeObj);
+            }
+            return `
+                <div class="pst-r mb-2">
+                    <h2 class="font-lg mb-1">${typeObj.name}</h2>
+                    <p class="font-md mb-1">${typeObj.description}</p>
+                    <div class="checkBox row gap-1 justify-flex-start"></div>
+                </div>
+                <hr class="mt-2 mb-2">
+            `;
+        }).join('');
+        $(container).html(content);
 
         // 插入 items 到對應的 checkBox
         dataArr.items.forEach((item, i) => {
