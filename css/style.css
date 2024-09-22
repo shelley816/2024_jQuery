@@ -2482,16 +2482,33 @@ img {
   background-color: rgba(0, 0, 0, 0.6);
 }
 .cover-bg .container {
+  border-radius: 10px;
   max-width: 600px;
   background-color: rgb(255, 255, 255);
 }
 
-.checkBox label > a {
-  padding: 10px;
+.checkBox label div > a {
+  width: 21px;
+  height: 21px;
+  top: 15px;
+  right: 15px;
+  padding: 8px;
   border-radius: 20px;
+  background: url(../img/icon_travel_01.png) center center no-repeat;
 }
-.checkBox label > a:hover {
+.checkBox label div > a:hover {
   background-color: #edf1f1;
+}
+.checkBox label p {
+  height: 44px;
+}
+.checkBox label ul {
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.checkBox label ul li {
+  padding: 3px 10px;
 }
 
 #addButton {
@@ -2500,4 +2517,25 @@ img {
 
 #itemPopup {
   z-index: 9999;
+}
+
+.txtInput input, .txtInput select {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  margin: 0.75rem 0;
+  display: inline-block;
+  font-size: 1rem;
+  border: 2px solid #4F7374;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.2);
+  color: #000000;
+}
+.txtInput input::placeholder, .txtInput select::placeholder {
+  font-size: 1rem;
+  color: #9e9e9e;
+}
+.txtInput label {
+  font-size: 1rem;
+  color: #4F7374;
 }

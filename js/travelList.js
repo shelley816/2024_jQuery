@@ -237,9 +237,9 @@ $(document).ready(function(){
         // 建立內容並插入網頁
         let content = getTypes.map((type, index) => `
             <div class="pst-r mb-2">
-                <h2 class="font-lg mb-0">${dataArr.types[index].name}</h2>
-                <p class="font-md">${dataArr.types[index].description}</p>
-                <div class="checkBox row gap-2 justify-flex-start"></div>
+                <h2 class="font-lg mb-1">${dataArr.types[index].name}</h2>
+                <p class="font-md mb-1">${dataArr.types[index].description}</p>
+                <div class="checkBox row gap-1 justify-flex-start"></div>
             </div>
             <hr class="mt-2 mb-2">
         `).join('');
@@ -250,11 +250,17 @@ $(document).ready(function(){
         dataArr.items.forEach((item, i) => {
             let currentState =  dataArr.items[i].state;
             let itemHTML = `
-                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl ${currentState ? 'bg-primary-light-8' : ''}" for="checkbox-nested-${i}">
-                    <input data-num=${i} type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}" ${currentState ? 'checked' : ''}>
-                    <span class="ml-1">${item.name}</span>
-                    <p class="text-gray mt-1">${item.detail}</p>
-                    <a class="pst-a t-1 r-1" href="#"><img class="display-b" src="img/icon_travel_01.png" alt=""></a>
+                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
+                    <div class="card ${currentState ? 'bg-primary-light-8' : ''}">
+                        <input data-num=${i} type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}" ${currentState ? 'checked' : ''}>
+                        <span class="ml-1">${item.name}</span>
+                        <p class="text-gray mt-1">${item.detail}</p>
+                        <a id="morAct" class="pst-a" href="#"></a>
+                        <ul class="moreActInfo pst-a t-4 r-2 font-sm" style="display: none;">
+                            <li><a class="editBtn" data-num=${i} href="#">編輯</a></li>
+                            <li><a class="deleteBtn" data-num=${i} href="#">刪除</a></li>
+                        </ul>
+                    </div>
                 </label>
             `;
             let typeIndex = getTypes.indexOf(item.type);
@@ -273,9 +279,9 @@ $(document).ready(function(){
 
         // 更新數據, UI
         dataArr.items[getNum].state = currentState;
-        $(this).parent().addClass("bg-primary-light-8");
+        $(this).parents(".card").addClass("bg-primary-light-8");
         if(!currentState){
-            $(this).parent().removeClass("bg-primary-light-8");
+            $(this).parent(".card").removeClass("bg-primary-light-8");
         }
 
         // 儲存到 localStorage
@@ -292,6 +298,7 @@ $(document).ready(function(){
     const itemDetailId = $("#itemDetail");
     const textRemindId = $("#textRemind");
     const addItemId = $("#addItem");
+    const editItemId = $("#editItem");
 
     // 顯示表格
     addBtn.on("click", function(e){
@@ -301,7 +308,7 @@ $(document).ready(function(){
         let content = `<option value="">請選擇類型</option>` +  getTypes.map((type, index) => `<option>${dataArr.types[index].name}</option>`).join('');
         $(typesWarp).html(content);
 
-        // 顯示 UI
+        // 顯示 popup
         $(itemPopup).fadeIn();
     });
 
@@ -309,6 +316,10 @@ $(document).ready(function(){
     cancelItemPopup.on("click", function(e){
         e.preventDefault();
         $(itemPopup).fadeOut();
+
+        $(typesWarp).val("");
+        $(itemNameId).val("");
+        $(itemDetailId).val("");
     });
 
     // 偵測 <option> 是否改變
@@ -319,6 +330,7 @@ $(document).ready(function(){
 
     //新增物品 + 更新資料
     addItemId.on("click", function(e){
+        $(editItemId).hide();
         let typesVal = $(typesWarp).val();
         let itemNameVal = $(itemNameId).val();
         let itemDetailVal = $(itemDetailId).val();
@@ -351,6 +363,50 @@ $(document).ready(function(){
         typesVal = "";
         itemNameVal = "";
         itemDetailVal = "";
+    });
+
+    // 點擊 moreAct
+    $(document).on("click", ".checkBox a", function(e){
+        e.preventDefault();
+        $(this).siblings('.moreActInfo').fadeIn(500);
+    });
+
+    // 檢測滑鼠移出 .checkBox 時隱藏 .moreActInfo
+    $(document).on("mouseleave", ".checkBox", function(){
+        const parentCheckBox = $(this).closest('.checkBox');
+        parentCheckBox.find('.moreActInfo').fadeOut(500);
+    });
+
+    // 編輯此 item
+    $(document).on("click", ".editBtn", function(e){
+        e.preventDefault();
+        const getNum = e.target.getAttribute("data-num");
+
+        // 建立內容並插入網頁
+        let content = `<option value="">請選擇類型</option>` + getTypes.map((type, index) => {
+            // 檢查是否為當前物品的類型，並為其添加 `selected` 屬性
+            let isSelected = dataArr.types[index].name === dataArr.items[getNum].type ? 'selected' : '';
+            return `<option value="${dataArr.types[index].name}" ${isSelected}>${dataArr.types[index].name}</option>`;
+        }).join('');
+        
+        $(typesWarp).html(content);
+        $(itemNameId).val(dataArr.items[getNum].name);
+        $(itemDetailId).val(dataArr.items[getNum].detail);
+        $(addItemId).text("確認");
+
+        // 顯示 popup
+        $(itemPopup).fadeIn();
+    });
+
+    // 刪除此 item
+    $(document).on("click", ".deleteBtn", function(e){
+        e.preventDefault();
+        const getNum = e.target.getAttribute("data-num");
+
+        dataArr.items.splice(getNum, 1);
+        dataStr = JSON.stringify(dataArr);
+        localStorage.setItem('travelList', dataStr);
+        init();
     });
 
 });
