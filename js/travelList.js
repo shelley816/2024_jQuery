@@ -261,9 +261,9 @@ $(document).ready(function(){
         // 插入 items 到對應的 checkBox
         dataArr.items.forEach((item, i) => {
             let itemHTML = `
-                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl" for="checkbox-nested-${i}">
+                <label class="pst-r col-12-xs col-6-sm col-4-lg col-3-xl">
                     <div class="card ${item.state ? 'bg-primary-light-8' : ''}">
-                        <input data-num="${i}" type="checkbox" name="checkbox-nested-${i}" id="checkbox-nested-${i}" ${item.state ? 'checked' : ''}>
+                        <input data-num="${i}" type="checkbox" ${item.state ? 'checked' : ''}>
                         <span class="ml-1">${item.name}</span>
                         <p class="text-gray mt-1">${item.detail}</p>
                         <a id="morAct" class="pst-a" href="#"></a>
