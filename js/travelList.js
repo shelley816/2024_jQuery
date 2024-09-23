@@ -363,12 +363,15 @@ $(document).ready(function(){
         $("#itemPopup").fadeIn();
 
         // 確認編輯
-        $("#addItem").off('click').on("click", function() {
+        $("#addItem").off('click').on("click", function(e) {
+            e.preventDefault();
             item.type = $("#types").val();
             item.name = $("#itemName").val();
             item.detail = $("#itemDetail").val();
             updateLocalStorage();
-            $("#itemPopup").fadeOut();
+            $("#itemPopup").fadeOut(500, function() {
+                resetForm(); // 在 fadeOut 完成後執行
+            });
         });
     });
 
